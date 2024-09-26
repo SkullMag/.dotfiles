@@ -1,9 +1,21 @@
 set mouse=a
+set number
 set relativenumber
 set tabstop=4 shiftwidth=4 expandtab
 set smartindent
-set updatetime=300
 syntax on
+set updatetime=300
+function! InsertTabWrapper()
+    let col = col('.') - 1
+    if !col || getline('.')[col - 1] !~ '\k'
+        return "\<tab>"
+    else
+        return "\<c-p>"
+    endif
+endfunction
+
+inoremap <expr> <tab> InsertTabWrapper()
+inoremap <s-tab> <c-n>
 
 let mapleader=" "
 
@@ -17,16 +29,3 @@ nmap <silent> <c-h> :wincmd h<CR>
 nmap <silent> <c-l> :wincmd l<CR>
 
 nnoremap <leader>sh :!
-
-function! InsertTabWrapper()
-    let col = col('.') - 1
-    if !col || getline('.')[col - 1] !~ '\k'
-        return "\<tab>"
-    else
-        return "\<c-p>"
-    endif
-endfunction
-
-inoremap <expr> <tab> InsertTabWrapper()
-inoremap <s-tab> <c-n>
-
