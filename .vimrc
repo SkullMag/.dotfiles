@@ -1,6 +1,7 @@
 set mouse=a
 set number
 set relativenumber
+set colorcolumn=120
 set tabstop=4 shiftwidth=4 expandtab
 set smartindent
 syntax on
